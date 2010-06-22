@@ -1,0 +1,12 @@
+mpw6g - Minimal Pthreads for Windows 6 or Greater
+        (for multimedia applications)
+
+Do something like:
+
+CROSS_PREFIX=x86_64-w64-mingw32-
+INSTALL_PREFIX=/mingw
+all:
+	$(CROSS_PREFIX)gcc -std=c99 -o pthread.o -c pthread.c -Wall -O2
+	$(CROSS_PREFIX)ar cru libpthread.a pthread.o
+	cp libpthread.a $(INSTALL_PREFIX)/lib
+	cp pthread.h $(INSTALL_PREFIX)/include
