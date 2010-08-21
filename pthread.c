@@ -4,9 +4,9 @@
 
 #include "pthread.h"
 
-int pthread_create(pthread_t *restrict thread,
-                   const pthread_attr_t *restrict attr,
-                   void *(*start_routine)(void*), void *restrict arg)
+int pthread_create(pthread_t *__restrict__ thread,
+                   const pthread_attr_t *__restrict__ attr,
+                   void *(*start_routine)(void*), void *__restrict__ arg)
 {
     unsigned tid;
     *thread = (pthread_t) _beginthreadex(NULL, 0, (void*) start_routine,
@@ -20,8 +20,8 @@ int pthread_cond_signal(pthread_cond_t *cond)
     return 0;
 }
 
-int pthread_cond_wait(pthread_cond_t *restrict cond,
-                      pthread_mutex_t *restrict mutex)
+int pthread_cond_wait(pthread_cond_t *__restrict__ cond,
+                      pthread_mutex_t *__restrict__ mutex)
 {
     int ret;
     ret = SleepConditionVariableCS(cond, mutex, INFINITE);
@@ -69,15 +69,15 @@ int pthread_cond_destroy(pthread_cond_t *cond)
     return 0;
 }
 
-int pthread_cond_init(pthread_cond_t *restrict cond,
-                      const pthread_condattr_t *restrict condattr)
+int pthread_cond_init(pthread_cond_t *__restrict__ cond,
+                      const pthread_condattr_t *__restrict__ condattr)
 {
     InitializeConditionVariable(cond);
     return 0;
 }
 
-int pthread_mutex_init(pthread_mutex_t *restrict mutex,
-                       const pthread_mutexattr_t *restrict mutexattr)
+int pthread_mutex_init(pthread_mutex_t *__restrict__ mutex,
+                       const pthread_mutexattr_t *__restrict__ mutexattr)
 {
     InitializeCriticalSection(mutex);
     return 0;
