@@ -89,10 +89,8 @@ int pthread_num_processors_np(void)
     int n = 0;
 
     if (GetProcessAffinityMask(GetCurrentProcess(), &p, &s))
-        while (p) {
+        for (; p; p >>= 1)
             n += p&1;
-            p >>= 1;
-        }
 
     return n ? n : 1;
 }
